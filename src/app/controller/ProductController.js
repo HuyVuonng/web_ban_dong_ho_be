@@ -30,7 +30,7 @@ class ProductController{
 
     // get /product/newproducts
     newproducts(req, res, next){
-        Product.find({}).sort({'UploadAt':-1}).limit(5)
+        Product.find({}).sort({'createdAt':-1}).limit(5)
         .then(products=> res.json(products))
         .catch(next)
     }
@@ -46,10 +46,12 @@ class ProductController{
         
     }
 
-//post product
-    postpro(req, res){
-        res.send('post product')
-
+//post /create
+    create(req, res){
+        const formData= req.body;
+        const product= new Product(formData);
+        product.save()
+        .then(()=>res.redirect('http://localhost:3001/'))
     }
 }
 

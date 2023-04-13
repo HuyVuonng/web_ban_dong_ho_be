@@ -7,6 +7,8 @@ const app = express();
 const port = 3000;
 app.use(cors())
 app.use(morgan("combined"));
+app.use(express.urlencoded());
+app.use(express.json())
 //connetc to db
 db.connect();
 
