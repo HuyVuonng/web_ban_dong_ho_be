@@ -9,7 +9,7 @@ router.get('/search', productController.search)
 router.post('/create', productController.create)
 router.delete('/deletebyID/:id',productController.deletebyID)
 router.put('/:id/edit',productController.edit)
-
+router.get('/gioitinh/:gt',productController.getGt)
 
 
 router.get('/', productController.index)

@@ -6,6 +6,7 @@ const Product = new Schema({
     name: { type: String},
     price: { type: String, default: '0' },
     ThuongHieu: { type: String},
+    GioiTinh:{type: String},
     Decription: { type: String},
     SoLuong: { type: String, default: '0' },
     img: { type: String},

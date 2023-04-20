@@ -63,6 +63,12 @@ class ProductController {
     const id = req.params.id;
     Product.updateOne({ _id: id }, req.body).then(() => res.redirect("http://localhost:3001/quanly")).catch(next);
   }
+  getGt(req, res, next) {
+    const gt= req.params.gt
+    Product.find({GioiTinh: gt}).then((prod) => res.json(prod)).catch(next);
+  }
+
+
 }
 
 module.exports = new ProductController();
