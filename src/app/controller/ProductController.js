@@ -65,7 +65,7 @@ class ProductController {
   }
   getGt(req, res, next) {
     const gt= req.params.gt
-    Product.find({GioiTinh: gt}).then((prod) => res.json(prod)).catch(next);
+    Product.find({GioiTinh: gt}).sort({ createdAt: -1 }).then((prod) => res.json(prod)).catch(next);
   }
 
 
