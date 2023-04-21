@@ -58,17 +58,33 @@ class ProductController {
     const id = req.params.id;
     Product.findOneAndDelete({ _id: id }).then((prod) => res.send(prod));
   }
-//edit /:id/edit
+  //edit /:id/edit
   edit(req, res, next) {
     const id = req.params.id;
-    Product.updateOne({ _id: id }, req.body).then(() => res.redirect("http://localhost:3001/quanly")).catch(next);
+    Product.updateOne({ _id: id }, req.body)
+      .then(() => res.redirect("http://localhost:3001/quanly"))
+      .catch(next);
   }
   getGt(req, res, next) {
-    const gt= req.params.gt
-    Product.find({GioiTinh: gt}).sort({ createdAt: -1 }).then((prod) => res.json(prod)).catch(next);
+    const gt = req.params.gt;
+    let page = req.query.page;
+    const PAGESIZE = 2;
+    if (page) {
+      page = parseInt(page);
+      var skipProd = (page - 1) * PAGESIZE;
+      Product.find({ GioiTinh: gt })
+        .sort({ createdAt: -1 })
+        .skip(skipProd)
+        .limit(PAGESIZE)
+        .then((prod) => res.json(prod))
+        .catch(next);
+    } else {
+      Product.find({ GioiTinh: gt })
+        .sort({ createdAt: -1 })
+        .then((prod) => res.json(prod))
+        .catch(next);
+    }
   }
-
-
 }
 
 module.exports = new ProductController();
