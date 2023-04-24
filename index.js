@@ -11,8 +11,12 @@ app.use(morgan("combined"));
 app.use(express.urlencoded());
 app.use(methodOverride('_method'))
 app.use(express.json())
+// Cho phép lấy ảnh từ file img
+app.use('/img', express.static('img'));
 //connetc to db
 db.connect();
+
+
 
 route(app);
 

@@ -117,6 +117,7 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
+  product.img="http://localhost:3000/"+req.file.path;
   product.save().then(() => res.redirect("http://localhost:3001/quanly"));
 }
   
@@ -125,7 +126,9 @@ create(req, res) {
  //[put] /:id/edit
  edit(req, res, next) {
   const id = req.params.id;
-  Product.updateOne({ _id: id }, req.body)
+  const formDataEdit = req.body;
+  formDataEdit.img="http://localhost:3000/"+req.file.path;
+  Product.updateOne({ _id: id },formDataEdit)
     .then(() => res.redirect("http://localhost:3001/quanly"))
     .catch(next);
 }
