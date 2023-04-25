@@ -29,7 +29,7 @@ router.post("/create", upload.single("img"), productController.create);
 
 router.delete("/deletebyIDForce/:id", productController.deletebyIDForce);
 
-
+router.patch('/updateQuantity/:id',productController.updateQuantity)
 router.patch("/deletebyIDSoft/:id", productController.deletebyIDSoft);
 router.patch("/trash/restore/:id", productController.restore);
 

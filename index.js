@@ -8,8 +8,8 @@ const app = express();
 const port = 3000;
 app.use(cors())
 app.use(morgan("combined"));
-app.use(express.urlencoded());
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 // Cho phép lấy ảnh từ file img
 app.use('/img', express.static('img'));

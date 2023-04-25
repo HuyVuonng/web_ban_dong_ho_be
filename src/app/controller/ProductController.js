@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-
+const url=require("../url")
 class ProductController {
 
 // ===========================[GET]===============================
@@ -14,12 +14,12 @@ index(req, res, next) {
       .catch(next);
   } else if (page) {
     page = parseInt(page);
-    const PAGESIZE = 10;
-    var skipProd = (page - 1) * PAGESIZE;
+    const ProductInPage = 10;
+    var skipProd = (page - 1) * ProductInPage;
     Product.find({})
       .sort({ createdAt: -1 })
       .skip(skipProd)
-      .limit(PAGESIZE)
+      .limit(ProductInPage)
       .then((prod) => res.json(prod))
       .catch(next);
   } else {
@@ -75,12 +75,12 @@ trashProducts(req, res, next) {
   let page = req.query.page;
   if (page) {
     page = parseInt(page);
-    const PAGESIZE = 10;
-    var skipProd = (page - 1) * PAGESIZE;
+    const ProductInPage = 10;
+    var skipProd = (page - 1) * ProductInPage;
     Product.findDeleted({})
-      .sort({ createdAt: -1 })
+      .sort({ deletedAt: -1 })
       .skip(skipProd)
-      .limit(PAGESIZE)
+      .limit(ProductInPage)
       .then((prod) => res.json(prod))
       .catch(next);
   } else {
@@ -117,8 +117,8 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
-  product.img="http://localhost:3000/"+req.file.path;
-  product.save().then(() => res.redirect("http://localhost:3001/quanly"));
+  product.img=url.urlNodeJS+req.file.path;
+  product.save().then(() => res.redirect(url.urlReactJS+"quanly"));
 }
   
 
@@ -127,9 +127,11 @@ create(req, res) {
  edit(req, res, next) {
   const id = req.params.id;
   const formDataEdit = req.body;
-  formDataEdit.img="http://localhost:3000/"+req.file.path;
+  if(req.file){
+    formDataEdit.img=url.urlNodeJS+req.file.path;
+  }
   Product.updateOne({ _id: id },formDataEdit)
-    .then(() => res.redirect("http://localhost:3001/quanly"))
+    .then(() => res.redirect(url.urlReactJS+"quanly"))
     .catch(next);
 }
 
@@ -142,20 +144,26 @@ create(req, res) {
 //[Patch] /deletebyIDSoft
 deletebyIDSoft(req, res, next) {
   const id = req.params.id;
-  Product.delete({ _id: id }).then((prod) => res.send(prod));
+  Product.delete({ _id: id }).then((prod) => res.send(prod)).catch(next);;
 }
 
 
 //[patch] /trash/restore
 restore(req, res,next){
   const id = req.params.id;
-  console.log(id)
   Product.restore({ _id: id })
   .then((prod) => res.send(prod))
     .catch(next);
 };
 
-
+//[patch] /updateQuantity
+updateQuantity(req, res, next){
+  const id = req.params.id;
+  const formDataEdit = req.body;
+  Product.updateOne({ _id: id },formDataEdit)
+  .then((prod) => res.send(prod))
+    .catch(next);
+}
 
 
 
