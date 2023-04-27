@@ -8,6 +8,9 @@ const Bill = new Schema({
     thanhPho:{type: String},
     diaChi: { type: String},
     prodBuy: { type: Array},
+    tongTien: { type: String, default:"0"},
+    dangGiao: { type: Boolean, default: false},
+    daGiao: { type: Boolean, default: false},
 },{
     timestamps:true,
 });
