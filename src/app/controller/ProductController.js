@@ -10,6 +10,7 @@ index(req, res, next) {
   // res.send('get product')
   let idreq = req.query.id;
   let page = req.query.page;
+  console.log(req.rawHeaders[1]);
   if (idreq) {
     Product.findById(idreq)
       .then((products) => res.json(products))
@@ -119,7 +120,8 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
-  product.img=process.env.urlNodeJS + req.file.path;
+  // product.img=process.env.urlNodeJS + req.file.path;
+  product.img='http://'+req.rawHeaders[1]+'/'+ req.file.path;
   product.save().then(() => res.redirect(process.env.urlReactJS+"quanly"));
 }
   
@@ -130,7 +132,7 @@ create(req, res) {
   const id = req.params.id;
   const formDataEdit = req.body;
   if(req.file){
-    formDataEdit.img=process.env.urlNodeJS+req.file.path;
+    formDataEdit.img='http://'+req.rawHeaders[1]+'/'+ req.file.path;
   }
   Product.updateOne({ _id: id },formDataEdit)
     .then(() => res.redirect(process.env.urlReactJS+"quanly"))
