@@ -1,5 +1,4 @@
 const Bill = require("../models/Bill");
-const url = require("../url");
 class BillController {
   // [get] /
   getAllBills(req, res, next) {

@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const dotenv= require('dotenv');
 
+dotenv.config()
 
 async function connect(){
    try {
-    await mongoose.connect('mongodb://127.0.0.1/web_ban_dong_ho',
+    await mongoose.connect(process.env.DB,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true

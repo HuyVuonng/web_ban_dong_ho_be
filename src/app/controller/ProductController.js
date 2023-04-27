@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
-const url=require("../url")
+const dotenv= require('dotenv');
+
+dotenv.config()
 class ProductController {
 
 // ===========================[GET]===============================
@@ -117,8 +119,8 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
-  product.img=url.urlNodeJS+req.file.path;
-  product.save().then(() => res.redirect(url.urlReactJS+"quanly"));
+  product.img=process.env.urlNodeJS+req.file.path;
+  product.save().then(() => res.redirect(process.env.urlReactJS+"quanly"));
 }
   
 
@@ -128,10 +130,10 @@ create(req, res) {
   const id = req.params.id;
   const formDataEdit = req.body;
   if(req.file){
-    formDataEdit.img=url.urlNodeJS+req.file.path;
+    formDataEdit.img=process.env.urlNodeJS+req.file.path;
   }
   Product.updateOne({ _id: id },formDataEdit)
-    .then(() => res.redirect(url.urlReactJS+"quanly"))
+    .then(() => res.redirect(process.env.urlReactJS+"quanly"))
     .catch(next);
 }
 

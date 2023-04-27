@@ -1,6 +1,6 @@
 const url = {
-    urlNodeJS:"http://localhost:3000/",
-    urlReactJS:"http://localhost:3001/",
+    urlNodeJS:"https://huyvuonng.github.io/web_ban_dong_ho_be/",
+    urlReactJS:"https://huyvuonng.github.io/web_ban_dong_ho/",
 
 };
 
