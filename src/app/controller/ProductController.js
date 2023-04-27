@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 const dotenv= require('dotenv');
-
 dotenv.config()
+
 class ProductController {
 
 // ===========================[GET]===============================
@@ -119,7 +119,7 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
-  product.img=process.env.urlNodeJS+req.file.path;
+  product.img=process.env.urlNodeJS + req.file.path;
   product.save().then(() => res.redirect(process.env.urlReactJS+"quanly"));
 }
   
