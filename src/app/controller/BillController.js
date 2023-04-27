@@ -114,9 +114,7 @@ changToDelivered(req, res, next){
 
   // [delete] /deleteBill
   deleteBill(req, res, next) {
-    console.log('1');
     const id= req.params.id;
-    console.log("2");
     Bill.findOneAndDelete({ _id: id }).then((prod) => res.send(prod));
   }
 }
