@@ -120,8 +120,11 @@ getGt(req, res, next) {
 create(req, res) {
   const formData = req.body;
   const product = new Product(formData);
+  if(req.file){
+    product.img='https://'+req.rawHeaders[1]+'/'+ req.file.path;
+  }
   // product.img=process.env.urlNodeJS + req.file.path;
-  product.img='https://'+req.rawHeaders[1]+'/'+ req.file.path;
+  // product.img='https://'+req.rawHeaders[1]+'/'+ req.file.path;
   product.save().then(() => res.redirect(process.env.urlReactJS+"quanly"));
 }
   
