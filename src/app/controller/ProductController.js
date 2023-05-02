@@ -134,6 +134,10 @@ create(req, res) {
  edit(req, res, next) {
   const id = req.params.id;
   const formDataEdit = req.body;
+  if(formDataEdit.img===''){
+    delete formDataEdit.img;
+  }
+
   if(req.file){
     formDataEdit.img='https://'+req.rawHeaders[1]+'/'+ req.file.path;
   }
