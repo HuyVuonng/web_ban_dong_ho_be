@@ -35,7 +35,7 @@ index(req, res, next) {
 betseller(req, res, next) {
   Product.find({})
     .sort({ daBan: -1 })
-    .limit(4)
+    .limit(8)
     .then((products) => res.json(products))
     .catch(next);
 }
