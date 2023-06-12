@@ -3,6 +3,8 @@ const cors = require('cors')
 const morgan = require("morgan");
 const route = require("./src/route");
 const db = require("./src/config/db");
+const dotenv= require('dotenv');
+dotenv.config()
 const methodOverride = require('method-override') //để override sang method khác trong form
 const app = express();
 const port = 3000;
@@ -47,7 +49,7 @@ app.post("/sendMail", async (req, res, next) => {
     // server: "gmail",
     auth: {
       user: "nodemailerservices@gmail.com",
-      pass: "olghkngkvrrvbnrk",
+      pass: process.env.PassEmail,
     },
   });
   const option = {
