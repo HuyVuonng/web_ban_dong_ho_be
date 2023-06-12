@@ -47,12 +47,12 @@ app.post("/sendMail", async (req, res, next) => {
     port: 587,
     secure: false, 
     auth: {
-      user: "nodemailerservices@gmail.com",
+      user: "sendmailerservices@gmail.com",
       pass: process.env.PassEmail,
     },
   });
   const option = {
-    from: '"Mona" <nodemailerservices@gmail.com>',
+    from: '"Mona" <sendmailerservices@gmail.com>',
     to: `${req.body.data.email}`,
     subject: "Đặt hàng thành công",
     html: `<!DOCTYPE html
