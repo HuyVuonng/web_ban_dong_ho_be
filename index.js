@@ -45,15 +45,14 @@ app.post("/sendMail", async (req, res, next) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, // use SSL
-    // server: "gmail",
+    secure: false, 
     auth: {
       user: "nodemailerservices@gmail.com",
       pass: process.env.PassEmail,
     },
   });
   const option = {
-    from: "nodemailerservices@gmail.com",
+    from: '"Mona" <nodemailerservices@gmail.com>',
     to: `${req.body.data.email}`,
     subject: "Đặt hàng thành công",
     html: `<!DOCTYPE html
