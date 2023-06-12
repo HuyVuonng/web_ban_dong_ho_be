@@ -21,8 +21,7 @@ db.connect();
 
 
 app.post("/sendMail", async (req, res, next) => {
-  console.log(req.body.data);
-  console.log(req.body.data.products);
+ 
   let html = "";
 
   const priceConver = (price) => {
@@ -47,12 +46,12 @@ app.post("/sendMail", async (req, res, next) => {
     secure: false, // use SSL
     // server: "gmail",
     auth: {
-      user: "justinhuy123456789@gmail.com",
-      pass: "byrmrcrpzadmvxyq",
+      user: "nodemailerservices@gmail.com",
+      pass: "olghkngkvrrvbnrk",
     },
   });
   const option = {
-    from: "justinhuy123456789@gmail.com",
+    from: "nodemailerservices@gmail.com",
     to: `${req.body.data.email}`,
     subject: "Đặt hàng thành công",
     html: `<!DOCTYPE html
