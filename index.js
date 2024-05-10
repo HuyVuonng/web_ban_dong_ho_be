@@ -242,7 +242,7 @@ app.post("/create_payment_url", function (req, res, next) {
   vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
 
   console.log(vnpUrl);
-  res.redirect(vnpUrl);
+  res.json({ link: vnpUrl });
 });
 
 function sortObject(obj) {
