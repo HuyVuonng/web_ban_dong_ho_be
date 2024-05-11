@@ -273,25 +273,25 @@ app.get("/vnpay_ipn", function (req, res, next) {
     //kiểm tra checksum
     if (checkOrderId) {
       if (checkAmount) {
-        if (paymentStatus == "0") {
-          //kiểm tra tình trạng giao dịch trước khi cập nhật tình trạng thanh toán
-          if (rspCode == "00") {
-            //thanh cong
-            //paymentStatus = '1'
-            // Ở đây cập nhật trạng thái giao dịch thanh toán thành công vào CSDL của bạn
-            res.status(200).json({ RspCode: "00", Message: "Success" });
-          } else {
-            //that bai
-            //paymentStatus = '2'
-            // Ở đây cập nhật trạng thái giao dịch thanh toán thất bại vào CSDL của bạn
-            res.status(200).json({ RspCode: "00", Message: "Success" });
-          }
-        } else {
-          res.status(200).json({
-            RspCode: "02",
-            Message: "This order has been updated to the payment status",
-          });
+        //kiểm tra tình trạng giao dịch trước khi cập nhật tình trạng thanh toán
+        if (rspCode == "00") {
+          //thanh cong
+          //paymentStatus = '1'
+          // Ở đây cập nhật trạng thái giao dịch thanh toán thành công vào CSDL của bạn
+          res.status(200).json({ RspCode: "00", Message: "Success" });
+        } else if (rspCode == "02") {
+          //that bai
+          //paymentStatus = '2'
+          // Ở đây cập nhật trạng thái giao dịch thanh toán thất bại vào CSDL của bạn
+          res.status(200).json({ RspCode: "02", Message: "False" });
         }
+
+        // else {
+        //   res.status(200).json({
+        //     RspCode: "02",
+        //     Message: "This order has been updated to the payment status",
+        //   });
+        // }
       } else {
         res.status(200).json({ RspCode: "04", Message: "Amount invalid" });
       }
